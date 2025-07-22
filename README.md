@@ -76,10 +76,10 @@ Interactive chat with AI assistant representing the candidate.
    - Go to the home page
    - Paste the candidate's resume text into the form
    - Click "Upload & Start Interview Assistant"
-   - this will generate 2 links/buttons Admin chat and public chat
+   - This will generate 2 links/buttons Admin chat and public chat
 
 2. **Public chat**
-   - Share this link with HR. 
+   - Share this link with HR. (available for public access)
 
 3. **Interview Tips**
    - Use the suggested questions in the sidebar for common interview topics
