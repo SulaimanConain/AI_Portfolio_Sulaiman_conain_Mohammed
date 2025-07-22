@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Sulaiman - Public Chat</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+<style>
+    body { 
+        background-color: var(--bg-primary);
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        color: var(--text-primary);
+    }
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+    /* Chat header styling */
+    .chat-header {
+        flex-shrink: 0;
+        padding: 1rem 0;
+        background-color: var(--bg-primary);
+    }
+    
+    /* Chat layout - full screen */
+    .chat-layout {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .chat-main {
+        flex: 1;
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .chat-messages-section {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .chat-sidebar {
+        flex-shrink: 0;
+        width: 300px;
+    }
+    
+    .messages-container {
+        flex: 1;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding: 1rem;
+        background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+        scroll-behavior: smooth;
+        position: relative;
+        height: auto;
+        max-height: none;
+    }
+    
+    .message-input-area {
+        flex-shrink: 0;
+        padding: 1rem;
+        background: var(--bg-tertiary) !important;
+        border-top: 1px solid var(--border-color) !important;
+        border-radius: 0 0 12px 12px;
+    }
+    
+    /* All the same dark theme overrides as the admin chat */
+    .chat-page .container-fluid { color: var(--text-primary) !important; }
+    .bg-white { background-color: var(--bg-secondary) !important; color: var(--text-primary) !important; }
+    .text-muted { color: var(--text-secondary) !important; }
+    .border-top { border-color: var(--border-color) !important; }
+    .card { background-color: var(--bg-secondary) !important; border: 1px solid var(--border-color) !important; }
+    .message-bubble { color: var(--text-primary) !important; }
+    .message-bubble .message-header { color: var(--text-primary) !important; }
+    .message-bubble .message-content { color: var(--text-primary) !important; }
+    .quick-question { 
+        background-color: var(--bg-tertiary) !important; 
+        color: var(--text-primary) !important; 
+        border: 1px solid var(--border-color) !important; 
+        transition: all 0.3s ease !important;
+    }
+    .quick-question:hover { 
+        background-color: var(--primary-color) !important; 
+        color: var(--bg-primary) !important; 
+        border-color: var(--primary-color) !important;
+        transform: translateY(-1px);
+    }
+    #messageInput { background-color: var(--bg-secondary) !important; color: var(--text-primary) !important; border-color: var(--border-color) !important; }
+    
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .chat-main { flex-direction: column; gap: 0.5rem; padding: 0.5rem; }
+        .chat-sidebar { width: 100%; order: 2; }
+        .chat-messages-section { order: 1; }
+        .chat-layout { height: 100vh; }
+        
+        .chat-header .container-fluid {
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .chat-header h4 {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .chat-header p {
+            font-size: 0.8rem;
+            margin-bottom: 0;
+        }
+        
+        .chat-header .btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+</style>
+</style>
+</head>
+<body class="public-chat-page">
+    <!-- Main Content -->
+
+<div class="chat-layout">
+    <!-- Chat Header -->
+    <div class="chat-header">
+        <div class="container-fluid">
+            <div class="rounded-3 shadow-sm p-3" style="background-color: var(--bg-secondary) !important; border: 1px solid var(--border-color) !important;">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4 class="fw-bold text-primary mb-1">
+                            <i class="fas fa-comments me-2"></i>
+                            Interview Assistant Chat
+                        </h4>
+                        <p class="text-muted mb-0 small">
+                            <i class="fas fa-robot me-2"></i>
+                            Ask questions about Sulaiman - the AI will respond as if he were present
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="d-flex justify-content-end gap-1 flex-wrap">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="clearChat()" title="Clear Chat History">
+                                <i class="fas fa-broom me-1"></i><span class="d-none d-sm-inline">Clear Chat</span>
+                            </button>
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-warning btn-sm" title="Admin Access">
+                                <i class="fas fa-shield-alt me-1"></i><span class="d-none d-sm-inline">Admin</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-main">
+        <!-- Chat Messages Section -->
+        <div class="chat-messages-section">
+            <div class="container-fluid h-100">
+                <div class="chat-container card shadow-sm border-0 h-100">
+                    <!-- Messages Area (Scrollable) -->
+                    <div class="messages-container" id="messagesContainer">
+                        <!-- Welcome Message -->
+                        <div class="message-bubble assistant-message">
+                            <div class="message-header">
+                                <i class="fas fa-robot text-primary me-2"></i>
+                                <strong>AI Assistant</strong>
+                                <small class="text-muted ms-auto">Ready to help</small>
+                            </div>
+                            <div class="message-content mt-2">
+                                <p>Hello! I'm ready to represent Sulaiman based on his resume. You can ask me about his experience, skills, projects, or any other questions you might have during an interview.</p>
+                                <p class="mb-0"><strong>Try asking:</strong></p>
+                                <ul class="mb-0 mt-2">
+                                    <li>"Tell me about your experience with [technology/skill]"</li>
+                                    <li>"What was your role at [company]?"</li>
+                                    <li>"Can you describe a challenging project you worked on?"</li>
+                                    <li>"What are your strongest technical skills?"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message Input Area (Fixed) -->
+                    <div class="message-input-area" style="background-color: var(--bg-tertiary) !important;">
+                        <form id="messageForm" class="d-flex gap-2" style="background-color: transparent;">
+                            <div class="flex-grow-1">
+                                <textarea 
+                                    id="messageInput" 
+                                    class="form-control" 
+                                    rows="2"
+                                    placeholder="Ask Sulaiman a question... (e.g., 'Tell me about your experience with Python')"
+                                    style="resize: none; background-color: var(--bg-secondary) !important; color: var(--text-primary) !important; border-color: var(--border-color) !important;"
+                                    required></textarea>
+                            </div>
+                            <div class="d-flex flex-column justify-content-end">
+                                <button type="submit" class="btn btn-primary" id="sendBtn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span class="d-none d-sm-inline ms-1">Send</span>
+                                </button>
+                            </div>
+                        </form>
+                        <small class="text-muted mt-2 d-block">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Press Shift+Enter for new line, Enter to send
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar with suggested questions -->
+        <div class="chat-sidebar">
+            <!-- Resume Status -->
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Resume Status
+                    </h6>
+                </div>
+                <div class="card-body small">
+                    <p class="mb-1">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <strong>Resume Loaded</strong>
+                    </p>
+                    <p class="text-muted mb-0">AI ready to represent Sulaiman</p>
+                </div>
+            </div>
+
+            <!-- Quick Questions -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-question-circle me-2"></i>Sample Questions
+                    </h6>
+                </div>
+                <div class="card-body p-2">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary btn-sm text-start quick-question" 
+                                data-question="Tell me about your recent work experience"
+                                title="Tell me about your recent work experience">
+                            <i class="fas fa-briefcase me-2"></i>Recent Experience
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm text-start quick-question"
+                                data-question="What are your strongest technical skills?"
+                                title="What are your strongest technical skills?">
+                            <i class="fas fa-code me-2"></i>Technical Skills
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm text-start quick-question"
+                                data-question="Describe a challenging project you completed"
+                                title="Describe a challenging project you completed">
+                            <i class="fas fa-project-diagram me-2"></i>Challenging Project
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm text-start quick-question"
+                                data-question="What motivates you professionally?"
+                                title="What motivates you professionally?">
+                            <i class="fas fa-heart me-2"></i>Motivation
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm text-start quick-question"
+                                data-question="Where do you see yourself in 5 years?"
+                                title="Where do you see yourself in 5 years?">
+                            <i class="fas fa-road me-2"></i>Career Goals
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script>
+    // Additional public chat logging
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Public chat page loaded');
+        // Chat interface will be automatically initialized by chat.js
+    });
+</script>
+</body>
+</html> 

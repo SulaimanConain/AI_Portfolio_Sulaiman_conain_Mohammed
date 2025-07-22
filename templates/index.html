@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Resume - HR Resume Assistant{% endblock %}
+
+{% block body_class %}upload-page{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Dark theme overrides for upload page */
+    .upload-page {
+        background-color: var(--bg-primary) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* Ensure all text is visible */
+    .upload-page h1, .upload-page h2, .upload-page h3, .upload-page h4, .upload-page h5, .upload-page h6 {
+        color: var(--text-primary) !important;
+    }
+    
+    .upload-page p, .upload-page span, .upload-page div {
+        color: var(--text-primary) !important;
+    }
+    
+    .upload-page .text-primary {
+        color: var(--primary-color) !important;
+    }
+    
+    .upload-page .text-muted {
+        color: var(--text-secondary) !important;
+    }
+    
+    .upload-page .text-success {
+        color: var(--success-color) !important;
+    }
+    
+    .upload-page .text-warning {
+        color: var(--warning-color) !important;
+    }
+    
+    /* Form elements dark theme */
+    .upload-page .form-control {
+        background-color: var(--bg-tertiary) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--border-color) !important;
+    }
+    
+    .upload-page .form-control:focus {
+        background-color: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 0 0 0.2rem rgba(74, 171, 247, 0.25) !important;
+    }
+    
+    .upload-page .form-control::placeholder {
+        color: var(--text-muted) !important;
+        opacity: 0.8;
+    }
+    
+    .upload-page .form-label {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+    }
+    
+    .upload-page .form-text {
+        color: var(--text-secondary) !important;
+    }
+    
+    /* Card styling */
+    .upload-page .card {
+        background-color: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+        border-color: var(--border-color) !important;
+    }
+    
+    .upload-page .card-body {
+        background-color: var(--bg-secondary) !important;
+        color: var(--text-primary) !important;
+    }
+    
+    /* Feature section */
+    .upload-page .feature-item h5 {
+        color: var(--text-primary) !important;
+    }
+    
+    .upload-page .feature-item p {
+        color: var(--text-secondary) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="hero-content text-center mb-5">
+                    <h1 class="display-4 fw-bold text-primary mb-4">
+                        <i class="fas fa-robot text-secondary me-3"></i>
+                        AI-Powered Resume Assistant
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        Upload a resume and let our AI assistant answer questions about the candidate as if they were present in the interview.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="upload-card card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <div class="upload-header text-center mb-4">
+                            <div class="upload-icon mb-3">
+                                <i class="fas fa-file-upload fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="fw-bold mb-2">Upload Resume</h3>
+                            <p class="text-muted">Paste the candidate's resume text below to get started</p>
+                        </div>
+
+                        <form id="uploadForm" class="upload-form">
+                            <div class="mb-4">
+                                <label for="resumeText" class="form-label fw-semibold">
+                                    <i class="fas fa-document-text me-2"></i>Resume Content
+                                </label>
+                                <textarea 
+                                    id="resumeText" 
+                                    class="form-control form-control-lg" 
+                                    rows="12" 
+                                    placeholder="Paste the complete resume content here...&#10;&#10;Example:&#10;John Smith&#10;Software Engineer&#10;Email: john.smith@email.com&#10;Phone: (555) 123-4567&#10;&#10;EXPERIENCE:&#10;Senior Software Engineer at TechCorp (2020-2023)&#10;- Developed and maintained web applications&#10;- Led a team of 5 developers&#10;- Improved system performance by 40%&#10;&#10;EDUCATION:&#10;B.S. Computer Science, University of Technology (2018)&#10;&#10;SKILLS:&#10;Python, JavaScript, React, Node.js, AWS, Docker"
+                                    required></textarea>
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Paste the complete resume text including contact information, experience, education, and skills.
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg" id="uploadBtn">
+                                    <i class="fas fa-upload me-2"></i>
+                                    <span class="btn-text">Upload & Start Interview Assistant</span>
+                                    <span class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="uploadResult" class="mt-4 d-none">
+                            <!-- Success content will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="features-section">
+                    <h3 class="text-center fw-bold mb-5 text-primary">How It Works</h3>
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="feature-item">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-file-text fa-2x text-primary"></i>
+                                </div>
+                                <h5 class="fw-bold">1. Upload Resume</h5>
+                                <p class="text-muted">Paste the candidate's resume text into the form above</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="feature-item">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-comments fa-2x text-success"></i>
+                                </div>
+                                <h5 class="fw-bold">2. Ask Questions</h5>
+                                <p class="text-muted">Chat with the AI assistant about the candidate's qualifications</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center mb-4">
+                            <div class="feature-item">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-lightbulb fa-2x text-warning"></i>
+                                </div>
+                                <h5 class="fw-bold">3. Get Insights</h5>
+                                <p class="text-muted">Receive detailed responses as if from the candidate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %} 

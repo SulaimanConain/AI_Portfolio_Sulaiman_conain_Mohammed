@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}No Resume Available - HR Resume Assistant{% endblock %}
+
+{% block body_class %}no-resume-page{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Dark theme for no resume page */
+    .no-resume-page {
+        background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 50%, #16213e 100%);
+        min-height: 100vh;
+        color: var(--text-primary);
+    }
+    
+    .no-resume-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .no-resume-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        width: 100%;
+        max-width: 600px;
+    }
+    
+    .no-resume-icon {
+        font-size: 4rem;
+        color: var(--warning-color);
+        margin-bottom: 1rem;
+    }
+    
+    .action-card {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        transition: var(--transition);
+    }
+    
+    .action-card:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: var(--box-shadow);
+    }
+    
+    .action-card a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .action-card a:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="no-resume-container">
+    <div class="no-resume-card">
+        <div class="card-body p-5 text-center">
+            <div class="no-resume-icon">
+                <i class="fas fa-file-times"></i>
+            </div>
+            
+            <h2 class="fw-bold text-warning mb-3">No Resume Available</h2>
+            
+            <p class="lead text-muted mb-4">
+                There's currently no resume uploaded in the system. The AI assistant needs a resume to answer questions about Sulaiman's background and experience.
+            </p>
+            
+            <div class="row mt-4">
+                <!-- Admin Action -->
+                <div class="col-md-6 mb-3">
+                    <div class="action-card p-4 h-100">
+                        <a href="{{ url_for('login') }}">
+                            <div class="text-center">
+                                <i class="fas fa-shield-alt text-primary fa-2x mb-3"></i>
+                                <h5 class="fw-bold">Admin Access</h5>
+                                <p class="text-muted mb-0">
+                                    Log in as Sulaiman to upload and manage resume content
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Visitor Info -->
+                <div class="col-md-6 mb-3">
+                    <div class="action-card p-4 h-100">
+                        <div class="text-center">
+                            <i class="fas fa-info-circle text-info fa-2x mb-3"></i>
+                            <h5 class="fw-bold">For Visitors</h5>
+                            <p class="text-muted mb-0">
+                                Once a resume is uploaded by the admin, you'll be able to chat with AI about Sulaiman's experience
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: var(--border-color);">
+            
+            <div class="text-center">
+                <h6 class="text-muted mb-3">
+                    <i class="fas fa-question-circle me-2"></i>
+                    What is this system?
+                </h6>
+                <p class="small text-secondary">
+                    This is an AI-powered HR interview assistant. Once Sulaiman uploads his resume, 
+                    visitors can ask questions about his background, experience, and skills. 
+                    The AI responds as if Sulaiman himself were present in the interview.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
