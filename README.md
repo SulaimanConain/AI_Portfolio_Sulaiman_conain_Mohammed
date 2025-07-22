@@ -1,6 +1,6 @@
 # HR Resume Assistant
 
-A professional Flask application that allows users to upload their resumes and then HR managers can interact with an AI chatbot that represents the candidate during interviews.
+A professional Flask application that allows users to upload their resumes, enabling HR managers to interact with an AI chatbot that represents the candidate and can answer questions on their behalf..
 
 ## Features
 
