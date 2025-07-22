@@ -70,17 +70,16 @@ Interactive chat with AI assistant representing the candidate.
 
 ## Usage Guide
 
-### For HR Managers
+### For Users
 
 1. **Upload a Resume**
    - Go to the home page
    - Paste the candidate's resume text into the form
    - Click "Upload & Start Interview Assistant"
+   - this will generate 2 links/buttons Admin chat and public chat
 
-2. **Start Interviewing**
-   - Once uploaded, you'll be redirected to the chat interface
-   - Ask questions about the candidate's experience, skills, and background
-   - The AI will respond as if it were the candidate
+2. **Public chat**
+   - Share this link with HR. 
 
 3. **Interview Tips**
    - Use the suggested questions in the sidebar for common interview topics
