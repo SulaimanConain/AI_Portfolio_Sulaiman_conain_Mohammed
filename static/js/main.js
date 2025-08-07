@@ -14,7 +14,7 @@ class ResumeAssistant {
         console.log('HR Resume Assistant initialized');
         this.setupEventListeners();
         this.checkSessionStatus();
-        this.initGlobalSoundEffects();
+        // sound effects removed per request
     }
 
     setupEventListeners() {
@@ -54,22 +54,7 @@ class ResumeAssistant {
         }
     }
 
-    initGlobalSoundEffects() {
-        try {
-            const links = document.querySelectorAll('a.nav-link, .navbar .btn');
-            const hover = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
-            const click = new Audio('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg');
-            const defaultVolume = 0.3;
-            hover.volume = defaultVolume;
-            click.volume = defaultVolume;
-            links.forEach(el => {
-                el.addEventListener('mouseenter', () => { hover.currentTime = 0; hover.play().catch(()=>{}); });
-                el.addEventListener('click', () => { click.currentTime = 0; click.play().catch(()=>{}); });
-            });
-        } catch (e) {
-            console.warn('Sound effects init failed:', e);
-        }
-    }
+    // removed initGlobalSoundEffects
 
     // Utility functions
     showToast(message, type = 'info', duration = 3000) {
