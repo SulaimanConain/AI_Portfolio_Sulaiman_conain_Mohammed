@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}No Resume Available - HR Resume Assistant{% endblock %}
+{% block title %}No Resume Available{% endblock %}
 
 {% block body_class %}no-resume-page{% endblock %}
 
@@ -74,32 +74,12 @@
                 There's currently no resume uploaded in the system. The AI assistant needs a resume to answer questions about Sulaiman's background and experience.
             </p>
             
-            <div class="row mt-4">
-                <!-- Admin Action -->
-                <div class="col-md-6 mb-3">
-                    <div class="action-card p-4 h-100">
-                        <a href="{{ url_for('login') }}">
-                            <div class="text-center">
-                                <i class="fas fa-shield-alt text-primary fa-2x mb-3"></i>
-                                <h5 class="fw-bold">Admin Access</h5>
-                                <p class="text-muted mb-0">
-                                    Log in as Sulaiman to upload and manage resume content
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Visitor Info -->
-                <div class="col-md-6 mb-3">
-                    <div class="action-card p-4 h-100">
-                        <div class="text-center">
-                            <i class="fas fa-info-circle text-info fa-2x mb-3"></i>
-                            <h5 class="fw-bold">For Visitors</h5>
-                            <p class="text-muted mb-0">
-                                Once a resume is uploaded by the admin, you'll be able to chat with AI about Sulaiman's experience
-                            </p>
-                        </div>
+            <div class="mt-4">
+                <div class="action-card p-4 h-100">
+                    <div class="text-center">
+                        <i class="fas fa-info-circle text-info fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Resume Missing</h5>
+                        <p class="text-muted mb-0">Please add a resume file at <code>content/resume.txt</code> and refresh.</p>
                     </div>
                 </div>
             </div>
@@ -112,9 +92,8 @@
                     What is this system?
                 </h6>
                 <p class="small text-secondary">
-                    This is an AI-powered HR interview assistant. Once Sulaiman uploads his resume, 
-                    visitors can ask questions about his background, experience, and skills. 
-                    The AI responds as if Sulaiman himself were present in the interview.
+                    This is an AI-powered portfolio with a public Q&A chat. Once the resume file exists, 
+                    visitors can ask questions about Sulaiman's background, experience, and skills.
                 </p>
             </div>
         </div>

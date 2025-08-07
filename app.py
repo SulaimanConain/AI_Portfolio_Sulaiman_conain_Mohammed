@@ -109,6 +109,14 @@ PORTFOLIO_DATA = {
 # Resume file configuration
 RESUME_FILE_PATH = os.getenv('RESUME_FILE', os.path.join(os.path.dirname(__file__), 'content', 'resume.txt'))
 
+def load_resume_from_file(file_path: str) -> str:
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read().strip()
+    except Exception as e:
+        print(f"Failed to load resume from {file_path}: {e}")
+        return ""
+
 def initialize_public_resume():
     resume_text = load_resume_from_file(RESUME_FILE_PATH)
     if resume_text:
@@ -119,19 +127,11 @@ def initialize_public_resume():
             'uploader': 'system'
         }
         print(f"Public resume loaded from {RESUME_FILE_PATH} ({len(resume_text)} chars)")
-        else:
+    else:
         print(f"No resume loaded. Ensure resume exists at {RESUME_FILE_PATH}")
 
 # Initialize at import time
 initialize_public_resume()
-
-def load_resume_from_file(file_path: str) -> str:
-    try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return f.read().strip()
-    except Exception as e:
-        print(f"Failed to load resume from {file_path}: {e}")
-        return ""
 
 @app.route('/')
 def portfolio():
@@ -554,7 +554,7 @@ def health_check():
 if __name__ == '__main__':
     # Check configuration on startup
     print("=" * 50)
-    print("HR Resume Assistant Starting Up")
+    print("Portfolio & Questions to Sulaiman Starting Up")
     print("=" * 50)
     
     if not DEEPSEEK_API_KEY or DEEPSEEK_API_KEY == 'your-deepseek-api-key':

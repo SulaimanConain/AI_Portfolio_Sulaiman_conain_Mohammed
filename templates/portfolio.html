@@ -36,13 +36,7 @@
         </div>
       </div>
       <div class="d-flex align-items-center gap-3">
-        <a class="btn pipe-btn" href="{{ url_for('public_chat') }}"><i class="fas fa-gamepad me-2"></i>Public Chat</a>
-        {% if session.logged_in %}
-          <a class="btn btn-outline-warning" href="{{ url_for('chat') }}"><i class="fas fa-user-shield me-2"></i>Admin Chat</a>
-          <a class="btn btn-outline-primary" href="{{ url_for('admin_upload') }}"><i class="fas fa-upload me-2"></i>Upload</a>
-        {% else %}
-          <a class="btn btn-outline-warning" href="{{ url_for('login') }}"><i class="fas fa-user-shield me-2"></i>Admin</a>
-        {% endif %}
+        <a class="btn pipe-btn" href="{{ url_for('public_chat') }}"><i class="fas fa-gamepad me-2"></i>Questions to Sulaiman</a>
       </div>
     </div>
 
