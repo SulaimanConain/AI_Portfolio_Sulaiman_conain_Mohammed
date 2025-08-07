@@ -439,8 +439,11 @@
                             <button class="btn btn-outline-secondary btn-sm" onclick="clearChat()" title="Clear Chat History">
                                 <i class="fas fa-broom me-1"></i><span class="d-none d-sm-inline">Clear Chat</span>
                             </button>
-                            <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-sm" title="Upload New Resume">
+                            <a href="{{ url_for('admin_upload') }}" class="btn btn-outline-primary btn-sm" title="Upload New Resume">
                                 <i class="fas fa-upload me-1"></i><span class="d-none d-sm-inline">New Resume</span>
+                            </a>
+                            <a href="{{ url_for('portfolio') }}" class="btn btn-outline-light btn-sm" title="Back to Portfolio">
+                                <i class="fas fa-id-card me-1"></i><span class="d-none d-sm-inline">Portfolio</span>
                             </a>
                         </div>
                     </div>

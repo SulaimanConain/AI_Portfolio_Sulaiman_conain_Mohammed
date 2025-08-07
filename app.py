@@ -33,6 +33,85 @@ if not DEEPSEEK_API_KEY:
     print("WARNING: DEEPSEEK_API_KEY not found in environment variables!")
     print("Please add your API key to the .env file")
 
+# -----------------------------------------------------------------------------
+# Portfolio content (sourced from user's resume)
+# -----------------------------------------------------------------------------
+PORTFOLIO_DATA = {
+    "name": "Sulaiman Conain Mohammed",
+    "title": "AI-Enabled Full-Stack Developer & Data Systems Analyst",
+    "contact": {
+        "phone": "+1 (514) 746-9977",
+        "email": "mohammedsulaimanconain@gmail.com",
+        # Links can be added here if available, e.g., "github": "https://github.com/<username>",
+    },
+    "experience": [
+        {
+            "company": "Advance AI Lab",
+            "location": "Toronto, ON",
+            "role": "Software Developer",
+            "period": "Sep 2023 - Present",
+            "highlights": [
+                "Designed and developed a web-based multilingual translation platform for providers and patients across 20+ languages.",
+                "Built backend services using FastAPI with async support for real-time translation at scale.",
+                "Integrated DeepSeek AI API with caching and fallback logic for resilience and performance.",
+                "Implemented OAuth2, JWT, and secure password hashing with passlib.",
+                "Designed normalized SQLite schemas and optimized queries for translation data handling.",
+                "Developed RESTful APIs for translation, multilingual chat, batch processing, and medical summaries.",
+                "Implemented email verification and password reset flows using FastAPI BackgroundTasks and secure tokens.",
+                "Created responsive UI with Jinja2, Bootstrap, and vanilla JavaScript.",
+                "Focused on accessibility, data privacy, and scalability; explored cloud deployment patterns."
+            ]
+        },
+        {
+            "company": "IO Solutions inc",
+            "location": "Montreal, QC",
+            "role": "Python Software Developer",
+            "period": "Aug 2022 – Oct 2023",
+            "highlights": [
+                "Designed and deployed a scalable REST API backend using Django REST Framework for a job-matching platform.",
+                "Built a real-time applicant tracking dashboard with Flask and Socket.IO.",
+                "Implemented JWT auth and role-based permissions; created reusable components and middleware.",
+                "Automated resume parsing and keyword extraction with spaCy/NLTK into PostgreSQL.",
+                "Integrated Celery and Redis for background tasks, improving response times by 60%.",
+                "Deployed on Heroku and AWS EC2 with Nginx and Gunicorn; set up CI/CD with GitHub Actions.",
+                "Ensured GDPR-compliant data handling and dynamic localization for recruiters and job seekers."
+            ]
+        },
+        {
+            "company": "Concordia University",
+            "location": "Montreal, QC",
+            "role": "Programmer on Duty (TA)",
+            "period": "Sept 2022 – Dec 2022",
+            "highlights": [
+                "Conducted POD sessions for COEN 6711 – Microprocessor-based systems.",
+                "Guided students on interrupts, PWM, sensor interfacing, and serial protocols (I2C, UART, SPI).",
+                "Mentored projects: obstacle-avoidance robot, IoT home automation, Raspberry Pi self-driving car."
+            ]
+        }
+    ],
+    "technical_summary": [
+        "Backend & Full-Stack: C#.NET, ASP.NET Core, Entity Framework, Python, Flask, Django; REST APIs; JWT/session auth; RBAC; Frontend with AngularJS, Bootstrap, JS.",
+        "Database: SQL Server, PostgreSQL; complex queries and stored procedures; ORM (EF, Django ORM); Redis caching.",
+        "Cloud & DevOps: IIS, Heroku, AWS EC2; Docker; Nginx/Gunicorn; CI/CD with GitHub Actions; secure config via .env/Azure Key Vault.",
+        "ETL & Automation: Python, Celery; async tasks (email, language detection, resume parsing); translation caching; batch/concurrent processing.",
+        "AI & NLP: LLM API integrations; spaCy, langdetect; conversation summarization; language detection; multilingual chat.",
+        "Security & Testing: Auth flows, account verification, password recovery; logging, exception handling, middleware validation."
+    ],
+    "education": [
+        {"degree": "MEng, Electrical and Computer Engineering", "school": "Concordia University, Montreal", "period": "Jan 2021 – Dec 2022"},
+        {"degree": "BEng, Electronics and Computer Engineering", "school": "Osmania University, Hyderabad", "period": "Jun 2015 – Jul 2019"}
+    ],
+    "skills": [
+        "Python", "C#", "JavaScript", "ASP.NET", ".NET Core", "Shell", "Matlab", "SSIS", "MySQL", "TSQL",
+        "Azure", "GitHub", "Git", "Hadoop HDFS", "NumPy", "Pandas", "Spark", "AWS", "Hive", "Kafka",
+        "Plotly", "ADF", "Power BI", "Databricks", "Snowflake", "Jupyter", "Glue", "Tableau", "PowerShell"
+    ],
+    "achievements": [
+        "Regular Student award (2015).",
+        "DP-203: Microsoft Certified Azure Data Engineer."
+    ]
+}
+
 def require_login(f):
     """Decorator to require login for certain routes"""
     @wraps(f)
@@ -54,7 +133,7 @@ def login():
             session['logged_in'] = True
             session['user_id'] = user_id
             flash('Login successful! Welcome back, Sulaiman.', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('admin_upload'))
         else:
             flash('Invalid credentials. Please try again.', 'danger')
     
@@ -68,8 +147,13 @@ def logout():
     return redirect(url_for('public_chat'))
 
 @app.route('/')
+def portfolio():
+    """Public portfolio landing page with arcade feel"""
+    return render_template('portfolio.html', data=PORTFOLIO_DATA)
+
+@app.route('/admin/upload')
 @require_login
-def index():
+def admin_upload():
     """Main upload page - requires login"""
     return render_template('index.html')
 

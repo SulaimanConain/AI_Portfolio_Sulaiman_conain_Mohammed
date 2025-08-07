@@ -130,8 +130,26 @@
     }
 </style>
 </style>
+    <style>
+        .topbar .btn { padding: 0.25rem 0.5rem; font-size: 0.8rem; }
+    </style>
 </head>
 <body class="public-chat-page">
+    <!-- Slim top bar for quick access and volume control -->
+    <nav class="navbar navbar-dark topbar" style="background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+        <div class="container-fluid py-1">
+            <div class="d-flex align-items-center gap-2">
+                <a class="btn btn-sm btn-outline-light" href="{{ url_for('portfolio') }}"><i class="fas fa-id-card me-1"></i>Portfolio</a>
+                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('public_chat') }}"><i class="fas fa-comments me-1"></i>Public</a>
+                <a class="btn btn-sm btn-outline-warning" href="{{ url_for('login') }}"><i class="fas fa-user-shield me-1"></i>Admin</a>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-volume-down text-secondary"></i>
+                <input id="publicVolume" type="range" min="0" max="1" step="0.01" value="0.4" class="form-range" style="width: 120px;">
+                <i class="fas fa-volume-up text-secondary"></i>
+            </div>
+        </div>
+    </nav>
     <!-- Main Content -->
 
 <div class="chat-layout">
@@ -287,11 +305,19 @@
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 <script>
-    // Additional public chat logging
-    document.addEventListener('DOMContentLoaded', function() {
+    // Additional public chat logging + sound effects
+    (function(){
         console.log('Public chat page loaded');
-        // Chat interface will be automatically initialized by chat.js
-    });
+        const coin = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+        const jump = new Audio('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg');
+        const volume = document.getElementById('publicVolume');
+        const setVol = (v)=>{ coin.volume=v; jump.volume=v; };
+        if(volume){ setVol(volume.value); volume.addEventListener('input', e=> setVol(e.target.value)); }
+        document.querySelectorAll('.topbar .btn').forEach(btn=>{
+          btn.addEventListener('mouseenter', ()=>{ coin.currentTime=0; coin.play().catch(()=>{}); });
+          btn.addEventListener('click', ()=>{ jump.currentTime=0; jump.play().catch(()=>{}); });
+        });
+    })();
 </script>
 </body>
 </html> 
