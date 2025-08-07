@@ -136,15 +136,14 @@ initialize_public_resume()
 @app.route('/')
 def portfolio():
     """Public portfolio landing page with arcade feel"""
-    resume_text = resumes_storage.get('public', {}).get('resume_text', '')
-    return render_template('portfolio.html', data=PORTFOLIO_DATA, resume_text=resume_text)
+    return render_template('portfolio.html', data=PORTFOLIO_DATA)
 
 @app.route('/public')
 def public_chat():
     """Public chat page - accessible to everyone"""
     # Ensure default public session is set
     if 'public' not in resumes_storage or not resumes_storage['public'].get('resume_text'):
-        return render_template('error.html', error_message='Resume not found. Please ensure content/resume.txt exists.')
+        return jsonify({'error': 'Resume not found. Please ensure content/resume.txt exists.'}), 500
     session['public_session_id'] = 'public'
     return render_template('public_chat.html')
 
