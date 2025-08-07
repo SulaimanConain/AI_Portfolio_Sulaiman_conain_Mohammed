@@ -77,6 +77,17 @@
             </ul>
           </div>
         </div>
+
+        <div class="card brick-card pixel-border p-3 mt-4">
+          <div class="card-body">
+            <h5 class="text-primary arcade-title mb-3" style="font-size: 0.9rem;">Resume (TXT)</h5>
+            {% if resume_text %}
+              <pre style="white-space: pre-wrap; background: var(--bg-tertiary); padding: 1rem; border-radius: 8px; border:1px solid var(--border-color);">{{ resume_text }}</pre>
+            {% else %}
+              <p class="text-muted">Resume file not found. Add one at <code>content/resume.txt</code>.</p>
+            {% endif %}
+          </div>
+        </div>
       </div>
 
       <div class="col-lg-4">

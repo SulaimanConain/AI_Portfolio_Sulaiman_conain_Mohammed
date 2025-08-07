@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Chat with Candidate - HR Resume Assistant{% endblock %}
+{% block title %}Questions to Sulaiman{% endblock %}
 
 {% block body_class %}chat-page{% endblock %}
 
@@ -424,7 +424,7 @@
                     <div class="col-md-8">
                         <h4 class="fw-bold text-primary mb-1">
                             <i class="fas fa-comments me-2"></i>
-                            Interview Assistant Chat
+                            Questions to Sulaiman
                         </h4>
                         <p class="text-muted mb-0 small">
                             <i class="fas fa-robot me-2"></i>
@@ -433,15 +433,9 @@
                     </div>
                     <div class="col-md-4 text-end">
                         <div class="d-flex justify-content-end gap-1 flex-wrap">
-                            <button class="btn btn-outline-info btn-sm" onclick="testAPI()" title="Test API Connection">
-                                <i class="fas fa-heartbeat me-1"></i><span class="d-none d-sm-inline">Test API</span>
-                            </button>
                             <button class="btn btn-outline-secondary btn-sm" onclick="clearChat()" title="Clear Chat History">
                                 <i class="fas fa-broom me-1"></i><span class="d-none d-sm-inline">Clear Chat</span>
                             </button>
-                            <a href="{{ url_for('admin_upload') }}" class="btn btn-outline-primary btn-sm" title="Upload New Resume">
-                                <i class="fas fa-upload me-1"></i><span class="d-none d-sm-inline">New Resume</span>
-                            </a>
                             <a href="{{ url_for('portfolio') }}" class="btn btn-outline-light btn-sm" title="Back to Portfolio">
                                 <i class="fas fa-id-card me-1"></i><span class="d-none d-sm-inline">Portfolio</span>
                             </a>

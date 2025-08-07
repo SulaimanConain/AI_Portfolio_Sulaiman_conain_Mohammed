@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify, session, Response, stream_template, redirect, url_for, flash
+from flask import Flask, request, render_template, jsonify, session, Response, redirect, url_for
 import os
 import requests
 import json
@@ -14,12 +14,6 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your-secret-key-here')
-
-# Hardcoded login credentials
-ADMIN_CREDENTIALS = {
-    'user_id': 'sulaiman',
-    'password': 'admin'
-}
 
 # In-memory storage for resumes and chat history
 resumes_storage = {}
@@ -112,130 +106,61 @@ PORTFOLIO_DATA = {
     ]
 }
 
-def require_login(f):
-    """Decorator to require login for certain routes"""
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'logged_in' not in session or not session['logged_in']:
-            flash('Please log in to access this page.', 'warning')
-            return redirect(url_for('login'))
-        return f(*args, **kwargs)
-    return decorated_function
+# Resume file configuration
+RESUME_FILE_PATH = os.getenv('RESUME_FILE', os.path.join(os.path.dirname(__file__), 'content', 'resume.txt'))
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    """Handle user login"""
-    if request.method == 'POST':
-        user_id = request.form.get('user_id', '').strip()
-        password = request.form.get('password', '').strip()
-        
-        if user_id == ADMIN_CREDENTIALS['user_id'] and password == ADMIN_CREDENTIALS['password']:
-            session['logged_in'] = True
-            session['user_id'] = user_id
-            flash('Login successful! Welcome back, Sulaiman.', 'success')
-            return redirect(url_for('admin_upload'))
+def initialize_public_resume():
+    resume_text = load_resume_from_file(RESUME_FILE_PATH)
+    if resume_text:
+        resumes_storage['public'] = {
+            'resume_text': resume_text,
+            'upload_timestamp': datetime.now().isoformat(),
+            'chat_history': [],
+            'uploader': 'system'
+        }
+        print(f"Public resume loaded from {RESUME_FILE_PATH} ({len(resume_text)} chars)")
         else:
-            flash('Invalid credentials. Please try again.', 'danger')
-    
-    return render_template('login.html')
+        print(f"No resume loaded. Ensure resume exists at {RESUME_FILE_PATH}")
 
-@app.route('/logout')
-def logout():
-    """Handle user logout"""
-    session.clear()
-    flash('You have been logged out successfully.', 'info')
-    return redirect(url_for('public_chat'))
+# Initialize at import time
+initialize_public_resume()
+
+def load_resume_from_file(file_path: str) -> str:
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read().strip()
+    except Exception as e:
+        print(f"Failed to load resume from {file_path}: {e}")
+        return ""
 
 @app.route('/')
 def portfolio():
     """Public portfolio landing page with arcade feel"""
-    return render_template('portfolio.html', data=PORTFOLIO_DATA)
-
-@app.route('/admin/upload')
-@require_login
-def admin_upload():
-    """Main upload page - requires login"""
-    return render_template('index.html')
+    resume_text = resumes_storage.get('public', {}).get('resume_text', '')
+    return render_template('portfolio.html', data=PORTFOLIO_DATA, resume_text=resume_text)
 
 @app.route('/public')
 def public_chat():
     """Public chat page - accessible to everyone"""
-    # Check if there's any resume uploaded
-    if not resumes_storage:
-        return render_template('no_resume.html')
-    
-    # Get the latest resume (assuming single resume for now)
-    latest_session = list(resumes_storage.keys())[-1] if resumes_storage else None
-    
-    if latest_session:
-        # Set session for public users to use the latest resume
-        session['public_session_id'] = latest_session
-        return render_template('public_chat.html', 
-                             resume_info=resumes_storage[latest_session])
-    else:
-        return render_template('no_resume.html')
+    # Ensure default public session is set
+    if 'public' not in resumes_storage or not resumes_storage['public'].get('resume_text'):
+        return render_template('error.html', error_message='Resume not found. Please ensure content/resume.txt exists.')
+    session['public_session_id'] = 'public'
+    return render_template('public_chat.html')
 
 @app.route('/upload', methods=['POST'])
-@require_login
 def upload_resume():
-    """Handle resume upload - protected route"""
-    try:
-        print(f"Upload request received. Form data: {request.form}")
-        print(f"Session logged_in: {session.get('logged_in')}")
-        print(f"Session user_id: {session.get('user_id')}")
-        
-        resume_text = request.form.get('resumeText', '').strip()
-        
-        if not resume_text:
-            print("Error: No resume text provided")
-            return jsonify({'error': 'Please provide resume text'}), 400
-        
-        if len(resume_text) < 50:
-            print(f"Error: Resume too short. Length: {len(resume_text)}")
-            return jsonify({'error': 'Resume text seems too short. Please provide a complete resume.'}), 400
-        
-        # Generate session ID and store resume
-        session_id = str(uuid.uuid4())
-        session['session_id'] = session_id
-        
-        resumes_storage[session_id] = {
-            'resume_text': resume_text,
-            'upload_timestamp': datetime.now().isoformat(),
-            'chat_history': [],
-            'uploader': session['user_id']
-        }
-        
-        print(f"Resume uploaded successfully. Session ID: {session_id}")
-        
-        return jsonify({
-            'success': True,
-            'message': 'Resume uploaded successfully!',
-            'session_id': session_id,
-            'admin_chat_url': '/chat',
-            'public_chat_url': '/public'
-        })
-        
-    except Exception as e:
-        print(f"Upload error: {str(e)}")
-        return jsonify({'error': f'Upload failed: {str(e)}'}), 500
+    """Upload is disabled (admin removed)."""
+    return jsonify({'error': 'Upload disabled'}), 403
 
-@app.route('/chat')
-@require_login
-def chat():
-    """Private chat page for admin"""
-    session_id = session.get('session_id')
-    if not session_id or session_id not in resumes_storage:
-        flash('No resume found. Please upload a resume first.', 'warning')
-        return redirect(url_for('index'))
-    
-    return render_template('chat.html', is_admin=True)
+# Removed admin chat. Public chat is the only mode.
 
 @app.route('/chat/message', methods=['POST'])
 def chat_message():
     """Handle chat messages and get AI responses (non-streaming fallback) - works for both admin and public"""
     try:
-        # Check if user is admin or public
-        session_id = session.get('session_id') or session.get('public_session_id')
+        # Public session only
+        session_id = session.get('public_session_id') or 'public'
         
         if not session_id or session_id not in resumes_storage:
             return jsonify({'error': 'No active session. Please access the chat properly.'}), 400
@@ -298,8 +223,8 @@ def chat_message():
 def chat_stream():
     """Handle chat messages with streaming responses - works for both admin and public"""
     try:
-        # Check if user is admin or public
-        session_id = session.get('session_id') or session.get('public_session_id')
+        # Public session only
+        session_id = session.get('public_session_id') or 'public'
         
         if not session_id or session_id not in resumes_storage:
             return jsonify({'error': 'No active session. Please access the chat properly.'}), 400
@@ -565,10 +490,9 @@ def call_deepseek_api_streaming(messages):
 
 @app.route('/reset')
 def reset_session():
-    """Reset the current session"""
-    session_id = session.get('session_id')
-    if session_id and session_id in resumes_storage:
-        del resumes_storage[session_id]
+    """Reset only chat history for public session"""
+    if 'public' in resumes_storage:
+        resumes_storage['public']['chat_history'] = []
     session.clear()
     return jsonify({'success': True})
 

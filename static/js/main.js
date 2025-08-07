@@ -14,7 +14,6 @@ class ResumeAssistant {
         console.log('HR Resume Assistant initialized');
         this.setupEventListeners();
         this.checkSessionStatus();
-        // sound effects removed per request
     }
 
     setupEventListeners() {
@@ -53,8 +52,6 @@ class ResumeAssistant {
             });
         }
     }
-
-    // removed initGlobalSoundEffects
 
     // Utility functions
     showToast(message, type = 'info', duration = 3000) {
