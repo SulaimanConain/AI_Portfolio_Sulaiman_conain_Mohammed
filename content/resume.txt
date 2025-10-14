@@ -1,56 +1,47 @@
-Sulaiman Conain Mohammed
-AI-Enabled Full-Stack Developer & Data Systems Analyst
-Phone: +1(514)-746-9977 (Canada) | Gmail: mohammedsulaimanconain@gmail.com
-GitHub | Portfolio
-
+Sulaiman Conain Mohammed 
+Data Engineer / Analyst
+Phone: +91-7997059620 | Gmail: mohammedsulaimanconain@gmail.com GitHub | Portfolio
 WORK EXPERIENCE:
-Advance AI Lab – Toronto, ON
-Software Developer | Sep 2023 - Present
-- Designed and developed a web-based multilingual translation platform to facilitate effective communication between healthcare providers and patients across 20+ languages.
-- Built backend services using FastAPI with asynchronous support to handle real-time translation requests at scale.
-- Integrated DeepSeek AI API for high-accuracy, real-time translations, implementing caching and fallback logic to ensure resilience and performance.
-- Implemented secure user authentication and role-based access control using OAuth2, JWT, and password hashing via passlib.
-- Designed normalized SQLite database schemas and optimized query performance to improve translation data handling.
-- Developed RESTful APIs for text translation, multilingual chat, batch processing, and medical summary generation.
-- Led implementation of email verification and password reset features using FastAPI’s BackgroundTasks and secure token generation.
-- Created a responsive, user-friendly frontend using Jinja2, Bootstrap, and vanilla JavaScript, ensuring compatibility across devices and screen sizes.
-- Focused on accessibility, data privacy, and scalability, aligning the project with real-world healthcare communication needs.
-- Explored integration patterns with external AI services and laid the groundwork for potential deployment to cloud-based environments.
+Advance AI Lab – Toronto, ON – Jun 2024 - Aug 2025
+Data Engineer: Azure Data Engineering project for Healthcare Revenue Cycle Management (RCM):
+Designed and implemented end-to-end Azure Data Engineering pipelines using Azure Data Factory, Azure Databricks, and Azure SQL DB to ingest, process, and transform complex healthcare datasets, including EMR, claims, NPI, ICD, and CPT data, enabling real-time and batch processing in a Medallion Architecture (Bronze, Silver, Gold layers).
+Developed scalable data pipelines for incremental and full data loads using the audit logging mechanism and metadata-driven configuration, improving data ingestion efficiency and reliability across multiple hospital systems and insurance providers.
+Engineered robust Delta Lake data models incorporating Slowly Changing Dimension Type 2 (SCD2) and Common Data Model (CDM) standards to maintain historical accuracy and data lineage, facilitating accurate KPIs and financial reporting on Accounts Receivable and Payable in healthcare revenue cycle management.
+Automated data quality validation and quarantine workflows within the Silver layer to ensure high-quality analytical data for downstream data scientists and business users, reducing data discrepancies and enhancing trust in healthcare financial reports.
+Improved data security and operational efficiency by integrating Azure Key Vault for secure credential management and implemented Unity Catalog to streamline Azure Databricks data governance and access control.
+Optimized Azure Data Factory pipelines from sequential to parallel execution, significantly reducing data processing time and latency for healthcare financial datasets across multiple hospitals and insurance claim systems.
+Enhanced pipeline robustness by implementing retry mechanisms, active/inactive flags, and consistent naming conventions for datasets and storage structures across Azure Data Lake Storage Gen2, enabling maintainable and scalable data architecture.
+Delivered comprehensive fact and dimension tables in the Gold layer to empower business reporting teams with actionable insights into revenue cycle KPIs such as Days in AR, AR > 90 days, and payment collection efficiency, directly supporting hospital financial health monitoring and cash flow optimization.
+Advance AI Lab – Toronto, ON – Sep 2023 - Jan 2024
+Software Developer Intern : Full stack AI Translation and transcription system in EMR 
+Developed and deployed a full-stack Universal Translation application using Flask, SQLAlchemy, and MySQL to bridge communication gaps between users speaking different languages.
+Implemented robust user authentication system with email verification, JWT token management, and role-based access controls ensuring secure handling of user data.
+Engineered RESTful API endpoints to serve both web and mobile clients, facilitating real-time translation across 19+ languages with high accuracy.
+Integrated AI-powered chat functionality for contextual conversations, enabling more nuanced and meaningful communication between different language speakers.
+Containerized and deployed the application using Azure App Service and Gunicorn WSGI server, ensuring high availability and scalability.
+Designed and implemented a comprehensive error handling system with detailed logging to maintain 99.9% uptime for critical translation services.
 
-IO Solutions inc – Montreal, QC
-Python Software Developer | Aug 2022 – Oct 2023
-- Designed and deployed a scalable REST API backend using Django REST Framework, powering a job-matching platform for multilingual users across Canada.
-- Built a real-time applicant tracking dashboard with Flask, integrating Socket.IO for live updates and recruiter collaboration.
-- Implemented secure user authentication and role-based permissions using JWT tokens and Django’s built-in auth system.
-- Created reusable components and custom middleware to handle user onboarding, form validation, and error handling efficiently.
-- Automated resume parsing and keyword extraction using Python NLP libraries (spaCy, NLTK) and stored structured data in PostgreSQL.
-- Integrated Celery and Redis to offload long-running tasks (e.g., PDF parsing, email dispatch) to background workers, improving response times by 60%.
-- Deployed the full stack on Heroku and AWS EC2, using Nginx and Gunicorn for production-grade performance.
-- Set up CI/CD pipelines using GitHub Actions, automating tests, code linting, and deployment across staging and production.
-- Ensured GDPR-compliant data handling and included dynamic language localization for both recruiters and job seekers.
-
-Concordia University – Montreal, QC
-Programmer on Duty (TA) | Sept 2022 – Dec 2022
-- Conducted POD sessions of COEN 6711 – Microprocessor-based systems.
-- Imparted knowledge of advanced microprocessors concepts – interrupts, PWM, Sensor interfacing, and communication protocols such as I2C, UART & SPI onto students.
-- Guided Students on projects such as in making an Obstacle avoidance robot using an Ultrasonic sensor, an IoT-based Home Automation project & Guided Students on a self-driving car using the raspberry pi project.
-
+IO-Solutions  – Montreal, Canada – Aug 2022 - Dec 2023
+Voice and Non Voice Associate for Rogers and Fido
+Managed incoming sales inquiries and effectively converted leads into customers, enhancing revenue generation for Rogers and Fido.
+Utilized CRM Maestro to track customer interactions, sales progress, and follow-ups, ensuring accurate and up-to-date client records.
+Coordinated with sales teams to upsell and cross-sell products, contributing to meeting and exceeding sales goals.
+Maintained detailed sales records and reports using CRM Maestro to support performance analysis and strategic planning.
+Delivered personalized product recommendations based on customer needs, leveraging product knowledge and CRM insights.
+Handled sales objections and negotiated solutions to close sales while maintaining high customer satisfaction levels.
+Collaborated with team members to streamline sales processes and improve customer engagement strategies.
+Concordia University – Montreal, Canada – Sept 2022 to Dec 2022 
+Programmer on duty(Teaching Assistant): 
+Conducted POD/ Teaching Assistant sessions of COEN 6711 – Microprocessor-based systems 
 TECHNICAL SUMMARY
-Backend & Full-Stack Development: Proficient in developing secure, scalable web applications using C#.NET, ASP.NET Core, Entity Framework, Python, Flask, and Django. Skilled in building RESTful APIs, integrating JWT and session-based authentication, and managing role-based access control. Experienced in developing responsive frontends using AngularJS, Bootstrap, and vanilla JavaScript.
-Database Engineering & Optimization: Expert in SQL Server and PostgreSQL, with strong command over complex queries, stored procedures, and schema optimization. Experience with ORM tools including Entity Framework and Django ORM to streamline data operations. Applied Redis caching to improve backend response times and reduce API call loads by up to 30%.
-Cloud Platforms & DevOps: Experience deploying cloud-native applications via IIS, Heroku, and AWS EC2 using Docker and process managers like Gunicorn/Nginx. Familiar with CI/CD pipelines using GitHub Actions, secure configuration management using .env files and Azure Key Vault, and container orchestration for scalable deployment.
-ETL and Automation: Developed ETL processes using Python scripts, Flask backends, and Celery workers for processing multilingual data and automating async tasks like email dispatch, language detection, and resume parsing. Applied translation caching and load-balanced batch processing using concurrent APIs.
-AI and Intelligent systems: Built AI-driven systems integrating LLM APIs and natural language processing using Python libraries like spaCy and langdetect, enabling contextual chatbot interactions and multilingual translation capabilities. Designed conversation summarization and language detection features for real-time applications.
-Security and Testing: Implemented secure authentication mechanisms, account verification workflows, and password recovery using Flask-Mail and token-based flows. Proficient in writing modular, testable code with logging, exception handling, and middleware-driven validation logic.
-
+Data Engineering & Cloud Integration: Proficient in designing and implementing scalable data pipelines and ETL workflows using Azure Data Factory, Azure Databricks, and SQL-based technologies. Experienced in transforming multilingual datasets, optimizing data flow architectures, and ensuring data quality and consistency across diverse sources.
+Backend & Full-Stack Development: Hands-on experience in developing RESTful APIs and full-stack applications using Flask, FastAPI, Django, and SQLAlchemy. Proven ability to build secure, high-performance systems with features such as JWT authentication, role-based access control, and advanced error handling.
+Database Management & Optimization: Expert in relational databases (MySQL, T-SQL) and ORM tools (SQLAlchemy). Strong focus on query optimization, indexing strategies, and caching mechanisms, achieving significant reductions in latency and database load.
+Cloud Platforms & Deployment: Skilled in deploying cloud-native applications using Microsoft Azure services like App Service, Function Apps, and Azure SQL. Familiar with containerization using Docker and deployment with Gunicorn for scalable and resilient services.
+Big Data & Analytics: Experience with Apache Spark, Hive, and Kafka for big data processing. Proficient in using Pandas, Numpy, and Plotly for data manipulation, analysis, and visualization. Created analytics dashboards for performance benchmarking, energy insights, and translation metrics.
 EDUCATION:
-Master of Electrical and Computer Engineering, Concordia University, Montreal – Jan 2021 to Dec 2022
-Bachelors of Electronics and Computer Engineering, Osmania University, Hyderabad – June 2015 to July 2019
-
+Master of Electrical and Computer Engineering – Concordia University, Montreal – Jan 2021 to Dec 2022 Bachelor of Electronics and Communication Engineering – Osmania University, Hyderabad – June 2015 to July 2019
 TECHNICAL SKILLS:
-Python, C#, JavaScript, ASP.NET, .NET Core, Shell, Matlab, SSIS, MySQL, TSQL, Microsoft Azure, Github, Git, Hadoop HDFS, Numpy, Pandas, Spark, AWS, Apache HIVE/Kafka/Spark, Plotly, Azure Data Factory (ADF), Power BI, Azure DataBricks, Snowflake, Jupyter Notebook, Glue, Snowflake, Tableau, and PowerShell.
-
-ACHIEVEMENTS, CERTIFICATIONS & COURSES:
-- Received Regular Student award during the year 2015.
-- DP-203 Data Engineering on Microsoft & Azure Microsoft Certified Azure data Engineer.
-
+C, C++, Python, Matlab, SSIS, MySQL, TSQL, Microsoft Azure, Github, Git ,Hadoop HDFS, Numpy, Pandas, Spark, AWS, Apache HIVE/Kafka/Spark, Plotly, Azure Data Factory(ADF), Power BI, Azure DataBricks, Snowflake, Jupyter Notebook, Glue, Snowflake, Tableau, and PowerShell.
+ACHIEVEMENTS:
+Received Regular Student award during the year 2015 at MJCET.
