@@ -32,77 +32,84 @@ if not DEEPSEEK_API_KEY:
 # -----------------------------------------------------------------------------
 PORTFOLIO_DATA = {
     "name": "Sulaiman Conain Mohammed",
-    "title": "AI-Enabled Full-Stack Developer & Data Systems Analyst",
+    "title": "Data Engineer / Analyst",
     "contact": {
-        "phone": "+1 (514) 746-9977",
+        "phone": "+91-7997059620",
         "email": "mohammedsulaimanconain@gmail.com",
-        # Links can be added here if available, e.g., "github": "https://github.com/<username>",
+        "github": "https://github.com/SulaimanConain?tab=repositories",
+        "portfolio": "https://sulaimanconain.github.io/sulaimanconainmohammed/index.html"
     },
     "experience": [
         {
             "company": "Advance AI Lab",
             "location": "Toronto, ON",
-            "role": "Software Developer",
-            "period": "Sep 2023 - Present",
+            "role": "Data Engineer",
+            "period": "Jun 2024 - Aug 2025",
             "highlights": [
-                "Designed and developed a web-based multilingual translation platform for providers and patients across 20+ languages.",
-                "Built backend services using FastAPI with async support for real-time translation at scale.",
-                "Integrated DeepSeek AI API with caching and fallback logic for resilience and performance.",
-                "Implemented OAuth2, JWT, and secure password hashing with passlib.",
-                "Designed normalized SQLite schemas and optimized queries for translation data handling.",
-                "Developed RESTful APIs for translation, multilingual chat, batch processing, and medical summaries.",
-                "Implemented email verification and password reset flows using FastAPI BackgroundTasks and secure tokens.",
-                "Created responsive UI with Jinja2, Bootstrap, and vanilla JavaScript.",
-                "Focused on accessibility, data privacy, and scalability; explored cloud deployment patterns."
+                "Designed and implemented end-to-end Azure Data Engineering pipelines using Azure Data Factory, Azure Databricks, and Azure SQL DB with Medallion Architecture.",
+                "Developed scalable data pipelines using audit logging and metadata-driven configuration, improving ingestion across hospitals and insurance providers.",
+                "Engineered Delta Lake data models with SCD2 and CDM standards for historical accuracy and data lineage.",
+                "Automated data quality validation and quarantine workflows within Silver layer, ensuring high-quality analytical data, reducing discrepancies.",
+                "Enhanced data security via Azure Key Vault and streamlined governance with Unity Catalog.",
+                "Optimized Azure Data Factory pipelines for parallel execution, cutting data processing time and latency.",
+                "Implemented retry mechanisms and active/inactive flags for maintainable and scalable data architecture.",
+                "Delivered fact and dimension tables enabling actionable revenue cycle KPIs."
             ]
         },
         {
-            "company": "IO Solutions inc",
-            "location": "Montreal, QC",
-            "role": "Python Software Developer",
-            "period": "Aug 2022 – Oct 2023",
+            "company": "Advance AI Lab",
+            "location": "Toronto, ON",
+            "role": "Software Developer Intern",
+            "period": "Sep 2023 - Jan 2024",
             "highlights": [
-                "Designed and deployed a scalable REST API backend using Django REST Framework for a job-matching platform.",
-                "Built a real-time applicant tracking dashboard with Flask and Socket.IO.",
-                "Implemented JWT auth and role-based permissions; created reusable components and middleware.",
-                "Automated resume parsing and keyword extraction with spaCy/NLTK into PostgreSQL.",
-                "Integrated Celery and Redis for background tasks, improving response times by 60%.",
-                "Deployed on Heroku and AWS EC2 with Nginx and Gunicorn; set up CI/CD with GitHub Actions.",
-                "Ensured GDPR-compliant data handling and dynamic localization for recruiters and job seekers."
+                "Developed and deployed full-stack Universal Translation application with Flask, SQLAlchemy, and MySQL.",
+                "Implemented robust authentication with email verification, JWT, and role-based access control.",
+                "Engineered RESTful APIs supporting real-time translation across 19+ languages.",
+                "Integrated AI-powered contextual chat functionality.",
+                "Containerized app deployment using Azure App Service and Gunicorn for scalability and high availability.",
+                "Designed error handling system with detailed logging, achieving 99.9% uptime."
+            ]
+        },
+        {
+            "company": "IO-Solutions",
+            "location": "Montreal, Canada",
+            "role": "Voice and Non Voice Associate",
+            "period": "Aug 2022 - Dec 2023",
+            "highlights": [
+                "Managed incoming sales inquiries converting leads effectively, enhancing revenue.",
+                "Utilized CRM Maestro for customer interaction tracking and sales reporting.",
+                "Collaborated with sales teams to upsell and cross-sell products, exceeding goals."
             ]
         },
         {
             "company": "Concordia University",
-            "location": "Montreal, QC",
-            "role": "Programmer on Duty (TA)",
-            "period": "Sept 2022 – Dec 2022",
+            "location": "Montreal, Canada",
+            "role": "Programmer on Duty (Teaching Assistant)",
+            "period": "Sept 2022 - Dec 2022",
             "highlights": [
-                "Conducted POD sessions for COEN 6711 – Microprocessor-based systems.",
-                "Guided students on interrupts, PWM, sensor interfacing, and serial protocols (I2C, UART, SPI).",
-                "Mentored projects: obstacle-avoidance robot, IoT home automation, Raspberry Pi self-driving car."
+                "Conducted POD sessions for COEN 6711 - Microprocessor-based systems."
             ]
         }
     ],
     "technical_summary": [
-        "Backend & Full-Stack: C#.NET, ASP.NET Core, Entity Framework, Python, Flask, Django; REST APIs; JWT/session auth; RBAC; Frontend with AngularJS, Bootstrap, JS.",
-        "Database: SQL Server, PostgreSQL; complex queries and stored procedures; ORM (EF, Django ORM); Redis caching.",
-        "Cloud & DevOps: IIS, Heroku, AWS EC2; Docker; Nginx/Gunicorn; CI/CD with GitHub Actions; secure config via .env/Azure Key Vault.",
-        "ETL & Automation: Python, Celery; async tasks (email, language detection, resume parsing); translation caching; batch/concurrent processing.",
-        "AI & NLP: LLM API integrations; spaCy, langdetect; conversation summarization; language detection; multilingual chat.",
-        "Security & Testing: Auth flows, account verification, password recovery; logging, exception handling, middleware validation."
+        "Data Engineering & Cloud Integration: Experienced in Azure Data Factory, Databricks, SQL technologies for scalable ETL workflows.",
+        "Backend & Full-Stack Development: Skilled with Flask, FastAPI, Django, RESTful APIs, JWT authentication, and role-based access.",
+        "Database Management & Optimization: Expertise in MySQL, T-SQL, SQLAlchemy; query optimization and indexing.",
+        "Cloud Platforms & Deployment: Proficient with MS Azure services, Docker, Gunicorn deployment.",
+        "Big Data & Analytics: Knowledge of Spark, Hive, Kafka; proficient in Pandas, Numpy, Plotly for data visualization."
     ],
     "education": [
-        {"degree": "MEng, Electrical and Computer Engineering", "school": "Concordia University, Montreal", "period": "Jan 2021 – Dec 2022"},
-        {"degree": "BEng, Electronics and Computer Engineering", "school": "Osmania University, Hyderabad", "period": "Jun 2015 – Jul 2019"}
+        {"degree": "Master of Electrical and Computer Engineering", "school": "Concordia University, Montreal", "period": "Jan 2021 - Dec 2022"},
+        {"degree": "Bachelor of Electronics and Communication Engineering", "school": "Osmania University, Hyderabad", "period": "Jun 2015 - Jul 2019"}
     ],
     "skills": [
-        "Python", "C#", "JavaScript", "ASP.NET", ".NET Core", "Shell", "Matlab", "SSIS", "MySQL", "TSQL",
-        "Azure", "GitHub", "Git", "Hadoop HDFS", "NumPy", "Pandas", "Spark", "AWS", "Hive", "Kafka",
-        "Plotly", "ADF", "Power BI", "Databricks", "Snowflake", "Jupyter", "Glue", "Tableau", "PowerShell"
+        "C", "C++", "Python", "Matlab", "SSIS", "MySQL", "TSQL", "Microsoft Azure", "GitHub", "Git",
+        "Hadoop HDFS", "Numpy", "Pandas", "Spark", "AWS", "Apache Hive", "Kafka", "Plotly",
+        "Azure Data Factory", "Power BI", "Azure Databricks", "Snowflake", "Jupyter Notebook",
+        "Glue", "Tableau", "PowerShell"
     ],
     "achievements": [
-        "Regular Student award (2015).",
-        "DP-203: Microsoft Certified Azure Data Engineer."
+        "Received Regular Student award during the year 2015 at MJCET."
     ]
 }
 
